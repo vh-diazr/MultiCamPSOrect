@@ -29,14 +29,14 @@ This implementation allows users to rectify images from multi-camera arrays, com
 
 ### Configuration parameters:
 
-| Parameter | Description |
-| --------- | ----------- |
-| Ncam = 3 | Number of cameras of the multiocular vision system. Feasible values Ncam = 2,3,4 |
-| dir = 'testimgs/' | Folder containing the input multiocular image. |
-| imname = 'exp02' | Name of the input multiocular images. |
-| Np0 = 250 | Number of desired corresponding points to be detected. |
-| deg = 60 | Specify the optimization bounds for rotation angles in the interval [-deg,deg]. |
-| scl = 0.3 | Specify the optimization bounds for scaling in the interval [1-scl,1+scl]. |
-| tx = 0.3 | Specify the optimization bounds for x-translation in the interval [-tx,tx]. |
-| ty = 0.3 | Specify the optimization bounds for y-translation in the interval [-ty,ty]. | 
-| w = 0.95 | Optimization coefficient for trade-off between epipolar constraint and distortion minimization. |
+| Parameter | Description                                                                                           |
+| --------- |-------------------------------------------------------------------------------------------------------|
+| Ncam = 3 | Specify the number of cameras in the multiocular vision system. Feasible values for Ncam: 2, 3, or 4. |
+| dir = 'testimgs/' | Directory path for the input multiocular image folder.                                                |
+| imname = 'exp02' | File names of the input multiocular images.                                                           |
+| Np0 = 250 | Number of desired corresponding points to detect.                                                     |
+| deg = 60 | Set optimization bounds for rotation angles within the interval [-deg, deg].                          |
+| scl = 0.3 | Set optimization bounds for scaling within the interval [1 - scl, 1 + scl].                           |
+| tx = 0.3 | Set optimization bounds for x-translation within the interval [-tx, tx].                              |
+| ty = 0.3 | Set optimization bounds for y-translation within the interval [-ty, ty].                              | 
+| w = 0.95 | Set optimization trade-off coefficient for epipolar constraint and distortion minimization. |
