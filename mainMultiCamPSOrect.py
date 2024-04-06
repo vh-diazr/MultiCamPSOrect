@@ -370,9 +370,9 @@ def fourCam(**kwargs):
 '''Main program begins here!'''
 ############################################################################
 '''Specification of configuration parameters'''
-Ncam = 4            # Number of cameras of the multiocular vision system
+Ncam = 2            # Number of cameras of the multiocular vision system
 dir = 'testimgs/'
-imname = 'exp02'
+imname = 'exp03'
 Np0 = 250           # Number of desired corresponding points to be detected
 deg = 60            # Specify the optimization bounds for rotation angles in the interval [-deg,deg]
 scl = 0.3           # Specify the optimization bounds for scaling in the interval [1-scl,1+scl]
