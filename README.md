@@ -9,8 +9,8 @@ However, it is essential to be performed previously a rectification of the captu
 Conventionally, image rectification is carried out in binocular images by firstly estimating a rectifying homography for each camera, and secondly, by performing a projective transformation on each captured image using a corresponding homography. 
 However, when a multi-ocular imaging system with more than two cameras is used the rectification becomes considerable more challenging.</p> 
 
-<p>This repository offers a Python implementation for rectifying multi-camera stereo images using Particle Swarm Optimization (PSO). 
-This implementation allows users to rectify images from multi-camera arrays, comprising two, three, and four cameras.
+<p>This repository presents a Python implementation for rectifying multi-camera stereo images using Particle Swarm Optimization (PSO). 
+Our implementation supports rectification of images from multi-camera arrays, accommodating configurations with two, three, and four cameras.
 </p>
 
 ### Requirements:
