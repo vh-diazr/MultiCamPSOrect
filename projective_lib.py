@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-#import matplotlib.pylab as plt
+import matplotlib.pylab as plt
 from numba import jit, njit
 
 def load_images(image_name):
@@ -97,10 +97,33 @@ def show_matched_features(img1, img2, matchedPoints_c12, matchedPoints_c21):
     #cv2.waitKey(0)
     #cv2.destroyAllWindows()
 
+def create_anaglyph(img1, img2, points_1, points_2):
+    # Convert images to grayscale
+    gray_img1 = np.dot(img1[..., :3], [0.2989, 0.5870, 0.1140])
+    gray_img2 = np.dot(img2[..., :3], [0.2989, 0.5870, 0.1140])
 
+    # Create anaglyph by combining grayscale images with color filters
+    anaglyph = np.zeros((gray_img1.shape[0], gray_img1.shape[1], 3), dtype=np.uint8)
+    anaglyph[:, :, 0] = gray_img2  # Red channel from the right image
+    anaglyph[:, :, 1] = gray_img1  # Green channel from the left image
+    anaglyph[:, :, 2] = gray_img1  # Blue channel from the left image
 
+    # Extract x and y coordinates of matched points
+    #points_1_x, points_1_y = matched_points_1[:, 0], matched_points_1[:, 1]
+    #points_2_x, points_2_y = matched_points_2[:, 0], matched_points_2[:, 1]
 
+    # Plot matching points using vectorized scatter plot
+    plt.scatter(points_1[:, 0], points_1[:, 1], color='g', marker='+', s=10)  # Green for left points
+    plt.scatter(points_2[:, 0], points_2[:, 1], color='r', marker='o', s=10)  # Red for right points
+    #
+    # Plot lines connecting corresponding points
+    for i in range(len(points_1)):
+        plt.plot([points_1[i, 0], points_2[i, 0]], [points_1[i, 1], points_2[i, 1]], 'y-', linewidth=0.5)  # Yellow lines
 
+    #plt.imshow(anaglyph)
+    #plt.title('Anaglyph with Matching Points and Lines')
+
+    return anaglyph
 
 @njit
 def gcoord(MN):
@@ -186,6 +209,10 @@ def hom(Y, S=1):
     ones_row = np.ones((1, Y.shape[1])) * S
     Hs = np.vstack((Y, ones_row))
     return Hs
+
+def ihom(pts):
+    return (pts[:-1] / pts[-1]).T
+
 # @njit
 # def proj_transform(I, ang, t, bc='k'):
 #     MN = I.shape
@@ -325,3 +352,32 @@ def gcoord_idx(x0, y0, MN):
     ix = (mp * x0 + MN[1] - 1) / 2 + 1
     iy = (mp * y0 + MN[0] - 1) / 2 + 1
     return ix, iy
+
+
+def reproject_points(pts_img1, pts_img2, G1, G2, Kn):
+    # Function to convert points to homogeneous coordinates
+
+    # Convert points to homogeneous coordinates
+    pts1h = hom(pts_img1.T)
+    pts2h = hom(pts_img2.T)
+
+    # Normalization
+    pts1n = np.dot(Kn, pts1h)
+    pts2n = np.dot(Kn, pts2h)
+
+    # Reprojection
+    pts1r = np.dot(G1, pts1n)
+    pts2r = np.dot(G2, pts2n)
+
+    # Denormalization
+    pts1d = np.dot(np.linalg.inv(Kn), pts1r)
+    pts2d = np.dot(np.linalg.inv(Kn), pts2r)
+
+    # Homogeneous to pixel coordinates
+    pts1t = ihom(pts1d)
+    pts2t = ihom(pts2d)
+
+    # Error estimation
+    err = np.sum(np.abs(pts1t[:, 1] - pts2t[:, 1])) / pts1t.shape[0]
+
+    return pts1t, pts2t, err

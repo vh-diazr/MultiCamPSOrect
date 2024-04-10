@@ -13,7 +13,7 @@ def twoCam(**kwargs):
     '''Parameters for the objective function and PSwO'''
     ftol = 1e-7         # tolerance of the fitness value for termination
     ftol_iter = 40      # number of iterations that fitness-value not improve more than 'ftol'
-    max_iter = 1500     # maximum number of allowed iteration for PSwO algorithm
+    max_iter = 2000     # maximum number of allowed iteration for PSwO algorithm
     psw_opts = {'c1': 0.5, 'c2': 0.3, 'w': 0.9} # coefficients of the PSwO algorithm
     fitmin = 2e-2       # minimum allowed fitness-value after PSwO termination
     maxtrials = 5       # maximum number of trials to obtain a solution fitness<=fitmin
@@ -97,15 +97,21 @@ def twoCam(**kwargs):
     elapsed_time = end_time - start_time
     print("(done in", round(elapsed_time, 2), "seconds)")
 
-    fig, axs = plt.subplots(2, 2)
-    axs[0,0].imshow(img1)
-    axs[0,1].imshow(img2)
-    axs[1,0].imshow(img1r)
-    axs[1,1].imshow(img2r)
-    fig.text(0.5, 0.98, 'Input unrectified images', ha='center', va='center', fontsize=12)
-    fig.text(0.5, 0.50, 'Output rectified images', ha='center', va='center', fontsize=12)
-    plt.tight_layout()
+    plt.figure(),
+    anaglyph1 = proj.create_anaglyph(img1, img2, pts_c12, pts_c21)
+    err0 = np.sum(np.abs(pts_c12[:, 1] - pts_c21[:, 1])) / pts_c12.shape[0]
+    plt.imshow(anaglyph1)
+    plt.title('Unrectified images C1-C2: ' + str(len(pts_c12)) + ' matching Points,  rect-err: ' + str(round(err0,2)))
+
+    plt.figure(),
+    pts1t, pts2t, err = proj.reproject_points(pts_c12, pts_c21, Gr1, Gr2, Kn)
+    anaglyph2 = proj.create_anaglyph(img1r, img2r, pts1t, pts2t)
+    plt.imshow(anaglyph2)
+    plt.title('Rectified images C1-C2: ' + str(len(pts_c12)) + ' matching Points, rect-err: ' + str(round(err,3)))
     plt.show()
+
+
+
 def threeCam(**kwargs):
     print("Image rectification of three cameras")
     # Code for case 2
@@ -372,13 +378,13 @@ def fourCam(**kwargs):
 '''Specification of configuration parameters'''
 Ncam = 2            # Number of cameras of the multiocular vision system
 dir = 'testimgs/'
-imname = 'exp03'
+imname = 'exp01'
 Np0 = 250           # Number of desired corresponding points to be detected
 deg = 60            # Specify the optimization bounds for rotation angles in the interval [-deg,deg]
 scl = 0.3           # Specify the optimization bounds for scaling in the interval [1-scl,1+scl]
 tx = 0.3            # Specify the optimization bounds for x-translation in the interval [-tx,tx]
 ty = 0.3            # Specify the optimization bounds for y-translation in the interval [-ty,ty]
-w = 0.95            # Optimization coefficient for trade-off between epipolar constraint and distortion minimization
+w = 0.97            # Optimization coefficient for trade-off between epipolar constraint and distortion minimization
 ###########################################################################
 '''kwargs parameters for the switch-case'''
 kwargs={"Ncam": Ncam, "Np0": Np0, "deg": deg, "scl": scl, "tx": tx, "w": w, "dir": dir, "imname": imname}
