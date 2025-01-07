@@ -14,7 +14,7 @@ The 3D distribution of a scene is obtained by triangulation from the disparity m
 The disparity map, is composed by the horizontal location differences of all corresponding points in the stereo images. 
 However, it is essential to be performed previously a rectification of the captured images to satisfy the epipolar constraint while minimizing distortion. 
 Conventionally, image rectification is carried out in binocular images by firstly estimating a rectifying homography for each camera, and secondly, by performing a projective transformation on each captured image using a corresponding homography. 
-However, when a multi-ocular imaging system with more than two cameras is used the rectification becomes considerable more challenging.</p> 
+However, rectifying multiocular systems with more than two cameras introduces greater complexity.</p> 
 
 <p>This repository provides a Python implementation for rectifying multi-camera stereo images using Particle Swarm Optimization (PSO). The implementation supports multi-camera arrays with two, three, or four cameras.</p>
 
