@@ -8,14 +8,14 @@
 
 
 ### General Description:
-<p>Stereo vision is an accessible and effective technology for three-dimensional (3D) imaging. The 3D structure of a scene is derived through triangulation from the disparity map of captured stereo images. This disparity map represents the horizontal differences between corresponding points in the stereo images.
+<p>Stereo vision is an accessible and effective technology for three-dimensional (3D) imaging. The 3D structure of a scene is obtained through triangulation from the disparity map of captured stereo images. This disparity map is composed by the horizontal differences of corresponding points in the stereo images.
 
 To ensure accurate disparity estimation and minimize distortion, image rectification must be performed beforehand to satisfy the epipolar constraint.
 
 For binocular images, rectification typically involves two steps:
 
-Estimating a rectifying homography for each camera.
-Applying a projective transformation to each image using the corresponding homography.</p>
+1. Estimating a rectifying homography for each camera.
+2. Applying a projective transformation to each image using the corresponding homography.</p>
 
 <p>
 Stereo vision is an effective and easy access technology for three-dimensional (3D) imaging.
