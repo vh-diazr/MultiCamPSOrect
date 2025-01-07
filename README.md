@@ -1,5 +1,10 @@
 # MultiCamPSOrect
-### Python Implementation for Multi-Camera Stereo Image Rectification
+### Python Implementation for Multi-Camera Stereo Image Rectification presented in
+
+> **Diaz-Ramirez, V.H.; Gonzalez-Ruiz, M.; Juarez-Salazar, R.; Cazorla, M.**  
+> _Reliable Disparity Estimation Using Multiocular Vision with Adjustable Baseline._  
+> _Sensors 2025, 25, 21._  
+> [https://doi.org/10.3390/s25010021](https://doi.org/10.3390/s25010021)  
 
 <p>
 Stereo vision is an effective and easy access technology for three-dimensional (3D) imaging.
