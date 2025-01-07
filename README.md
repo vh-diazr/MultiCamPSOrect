@@ -6,8 +6,9 @@
 > _Sensors 2025, 25, 21._  
 > [https://doi.org/10.3390/s25010021](https://doi.org/10.3390/s25010021)  
 
-**General Description:**
+
 <p>
+ **General Description:**
 Stereo vision is an effective and easy access technology for three-dimensional (3D) imaging.
 The 3D distribution of a scene is obtained by triangulation from the disparity map of the captured stereo images. 
 The disparity map, is composed by the horizontal location differences of all corresponding points in the stereo images. 
