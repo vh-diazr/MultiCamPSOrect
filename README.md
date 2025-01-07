@@ -15,14 +15,8 @@ To ensure accurate disparity estimation and minimize distortion, image rectifica
 For binocular images, rectification typically involves two steps:
 
 1. Estimating a rectifying homography for each camera.
-2. Applying a projective transformation to each image using the corresponding homography.</p>
+2. Applying a projective transformation to each image using the corresponding homography.
 
-<p>
-Stereo vision is an effective and easy access technology for three-dimensional (3D) imaging.
-The 3D distribution of a scene is obtained by triangulation from the disparity map of the captured stereo images. 
-The disparity map, is composed by the horizontal location differences of all corresponding points in the stereo images. 
-However, it is essential to be performed previously a rectification of the captured images to satisfy the epipolar constraint while minimizing distortion. 
-Conventionally, image rectification is carried out in binocular images by firstly estimating a rectifying homography for each camera, and secondly, by performing a projective transformation on each captured image using a corresponding homography. 
 However, rectifying multiocular systems with more than two cameras introduces greater complexity.</p> 
 
 <p>This repository provides a Python implementation for rectifying multi-camera stereo images using Particle Swarm Optimization (PSO). The implementation supports multi-camera arrays with two, three, or four cameras.</p>
