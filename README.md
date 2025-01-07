@@ -18,6 +18,17 @@ However, when a multi-ocular imaging system with more than two cameras is used t
 
 <p>This repository presents a Python implementation for rectifying multi-camera stereo images using Particle Swarm Optimization (PSO). 
 Our implementation supports rectification of images from multi-camera arrays, accommodating configurations with two, three, and four cameras.
+
+Please cite this paper as follows (Bibtex citation):
+
+	@article{rectMultiCamPSwo:2025,		
+	  title = "Reliable Disparity Estimation Using Multiocular Vision with Adjustable Baseline",
+	  author = "Diaz-Ramirez, Victor H. and Gonzalez-Ruiz, Martin and Juarez-Salazar, Rigoberto and Cazorla, Miguel",
+	  journal = "Sensors",
+	  volume = "25",
+    number = "1"   
+	  year = "2025",
+	} 
 </p>
 
 ### Requirements:
